@@ -23,4 +23,23 @@ RUN apt-get update && apt-get install -y docker-ce-cli
 # Jenkins 사용자를 Docker 그룹에 추가
 RUN groupadd docker && usermod -aG docker jenkins
 
+# 필요한 Python 패키지 설치
+RUN apt-get install -y python3-pip
+
+# 작업 디렉토리 설정
+WORKDIR /app
+
+# requirements.txt 복사 및 설치
+COPY requirements.txt /app/requirements.txt
+RUN pip3 install -r requirements.txt
+
+# Flask 애플리케이션 코드 복사
+COPY hello.py /app/hello.py
+
+# 포트 설정
+EXPOSE 5000
+
+# Flask 애플리케이션 실행
+CMD ["python3", "hello.py"]
+
 USER jenkins

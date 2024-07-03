@@ -25,6 +25,11 @@ RUN apt-get update && apt-get install -y docker-ce-cli
 # Jenkins 사용자를 Docker 그룹에 추가
 RUN groupadd docker && usermod -aG docker jenkins
 
+# kubectl 설치
+RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
+    && chmod +x kubectl \
+    && mv kubectl /usr/local/bin/
+
 # 작업 디렉토리 설정
 WORKDIR /app
 

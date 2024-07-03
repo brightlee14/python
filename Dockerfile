@@ -43,12 +43,12 @@ RUN python3 -m venv venv && \
     pip install -r requirements.txt
 
 # Flask 애플리케이션 코드 복사
-COPY hello.py /app/hello.py
+COPY app.py /app/app.py
 
 # 포트 설정
 EXPOSE 5000
 
 # Flask 애플리케이션 실행
-CMD ["bash", "-c", "source venv/bin/activate && python3 hello.py"]
+CMD ["bash", "-c", "source venv/bin/activate && python3 app.py"]
 
 USER jenkins
